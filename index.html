@@ -116,7 +116,6 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border:0;border-radiu
 <header>
   <div class="logo"><b><svg viewBox="0 0 24 24"><path d="M6 3l15 9-15 9z"/></svg></b>ReelRoom</div>
   <label class="hb pri" for="file" tabindex="0" id="add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add videos</label>
-  <button class="hb sq" id="layout" aria-label="Switch layout"><svg id="layIco" viewBox="0 0 24 24"></svg></button>
   <button class="hb sq" id="theme" aria-label="Toggle light or dark mode">
     <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg>
     <svg class="moon" viewBox="0 0 24 24"><path d="M20 14A8 8 0 0 1 10 4a8 8 0 1 0 10 10z"/></svg>
@@ -130,7 +129,6 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border:0;border-radiu
       <label class="hb pri" for="file"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add videos</label></div>
     <button class="big" id="big" aria-label="Play"><svg viewBox="0 0 24 24"><path d="M6 3l15 9-15 9z"/></svg></button>
     <div class="ctl"><div class="top">
-      <button class="tb lo" id="layout2" aria-label="Exit landscape"><svg id="layIco2" viewBox="0 0 24 24"></svg></button>
       <div class="ttl lo" id="ttl"></div>
       <button class="tb lo" id="libBtn" aria-label="Library"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></button>
       <button class="tb" id="gear" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
@@ -146,7 +144,7 @@ input[type=range]::-moz-range-thumb{width:15px;height:15px;border:0;border-radiu
         <span class="tm" id="tm">0:00 / 0:00</span><span class="sp"></span>
         <button id="mute" aria-label="Mute"><svg id="muteIco" viewBox="0 0 24 24"></svg></button>
         <input type="range" id="vol" min="0" max="1" step="0.05" value="1" aria-label="Volume">
-        <button id="fs" aria-label="Fullscreen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+        <button id="fs" aria-label="Landscape full screen"><svg id="fsIco" viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
       </div></div></div>
   </div></div>
   <div class="info" id="info"></div>
@@ -181,8 +179,8 @@ if(l==='portrait')app.classList.remove('open');
 const flip=l==='landscape'&&innerHeight>innerWidth;app.classList.toggle('flip',flip);
 if(flip){app.style.width=innerHeight+'px';app.style.height=innerWidth+'px';app.style.transform='translateX('+innerWidth+'px) rotate(90deg)'}
 else{app.style.width=app.style.height=app.style.transform=''}
-set('layIco',l==='landscape'?'toP':'toL');set('layIco2',l==='landscape'?'toP':'toL')};
-$('layout').onclick=$('layout2').onclick=async()=>{const toL=!app.classList.contains('landscape');manual=toL?'landscape':'portrait';
+$('fsIco').innerHTML=l==='landscape'?'<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>':'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>';$('fs').setAttribute('aria-label',l==='landscape'?'Exit landscape':'Landscape full screen')};
+$('fs').onclick=async()=>{const toL=!app.classList.contains('landscape');manual=toL?'landscape':'portrait';
 if(toL){try{await root.requestFullscreen();await screen.orientation.lock('landscape')}catch(e){}}
 else{try{screen.orientation.unlock()}catch(e){}try{if(document.fullscreenElement)await document.exitFullscreen()}catch(e){}}
 applyLayout()};
@@ -244,8 +242,7 @@ if(b.dataset.s)v.defaultPlaybackRate=v.playbackRate=+b.dataset.s;
 if(b.dataset.f)v.style.objectFit=b.dataset.f;
 if(b.dataset.t){root.dataset.theme=b.dataset.t;try{localStorage.setItem('rr-theme',b.dataset.t)}catch(x){}paintTheme()}
 if(b.id==='loop')v.loop=!v.loop;paintSet()};
-$('fs').onclick=()=>{const d=document;if(d.fullscreenElement||d.webkitFullscreenElement){(d.exitFullscreen||d.webkitExitFullscreen).call(d)}
-else{const f=stage.requestFullscreen||stage.webkitRequestFullscreen;if(f)f.call(stage);else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()}};
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&manual==='landscape'){manual='portrait';try{screen.orientation.unlock()}catch(e){}applyLayout()}});
 let idleT;function wake(){stage.classList.remove('idle');clearTimeout(idleT);if(!v.paused)idleT=setTimeout(()=>stage.classList.add('idle'),2800)}
 ['mousemove','touchstart','click'].forEach(e=>stage.addEventListener(e,wake,{passive:true}));
 addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'&&e.target.type==='range')return;

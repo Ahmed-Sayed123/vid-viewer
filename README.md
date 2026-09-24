@@ -6,7 +6,7 @@ A clean, single-file video viewer that plays videos from your own device. No bac
 
 - Add multiple videos from your device (or drag and drop on desktop)
 - Library with auto-generated thumbnails and durations
-- Portrait and landscape layouts. Switches automatically when you rotate your phone, or manually with the layout button. In landscape the screen fills with the video, even if the phone is held upright.
+- Portrait and landscape layouts. Switches automatically when you rotate your phone, or with the square full-screen button on the player. In landscape the screen fills with the video, even if the phone is held upright.
 - Double-tap the right side of the video to skip forward 10 seconds, the left side to go back. Keep tapping to add more.
 - Settings button (top right of the video): playback speed, fit/fill, loop, play next, light/dark
 - Light and dark themes (follows your device, remembers your choice)
